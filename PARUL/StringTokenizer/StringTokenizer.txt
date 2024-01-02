@@ -1,0 +1,135 @@
+`StringTokenizer` is a class in Java that is used to break a string into tokens (smaller parts) based on specified delimiters. It's part of the `java.util` package.
+
+Here are some key points about `StringTokenizer`:
+
+1. **Tokenization:** It provides a way to break a string into tokens based on delimiter characters or a set of delimiter characters.
+
+2. **Delimiters:** You can specify one or multiple delimiter characters when creating a `StringTokenizer` object. By default, whitespace characters (spaces, tabs, newlines) are used as delimiters if no delimiter is explicitly specified.
+
+3. **Token Retrieval:** It offers methods like `hasMoreTokens()` to check if there are more tokens available and `nextToken()` to retrieve the next token.
+
+4. **Custom Delimiters:** You can specify custom delimiter(s) as a string or a combination of characters to be used for tokenizing the input string.
+
+5. **No Delimiter in Output:** The delimiter itself is not included in the tokens retrieved by `nextToken()`. Only the text between the delimiters is considered as tokens.
+
+Example usage:
+
+```java
+import java.util.StringTokenizer;
+
+public class StringTokenizerExample {
+    public static void main(String[] args) {
+        StringTokenizer tokenizer = new StringTokenizer("This is an example sentence.", " ");
+        
+        while (tokenizer.hasMoreTokens()) {
+            String token = tokenizer.nextToken();
+            System.out.println("Token: " + token);
+        }
+    }
+}
+```
+
+Output:
+```
+Token: This
+Token: is
+Token: an
+Token: example
+Token: sentence.
+```
+
+In this example, the input string `"This is an example sentence."` is split into tokens based on the space delimiter provided to the `StringTokenizer`. Each word becomes a separate token retrieved by `nextToken()` method calls within the `while` loop.
+
+
+--------------------------------------------------------------------------------------------------------------------
+Q)How StringTokenizer divides token and stores data ?
+
+The StringTokenizer class in Java is used to break a string into tokens based on specified delimiter(s). It provides methods to retrieve these tokens individually.
+
+When you create a StringTokenizer object and provide it with an input string and delimiter(s), it performs the following actions:
+
+Initialization: The StringTokenizer initializes itself with the input string and delimiter(s) you specified.
+
+Tokenization: It scans the input string, searching for occurrences of the specified delimiter(s). Each occurrence of the delimiter marks the boundary between tokens.
+
+Storing Tokens: As it identifies the delimiters, StringTokenizer doesn't store the tokens in an array or collection. Instead, it maintains its internal state and position within the input string.
+
+Retrieving Tokens: When you call the nextToken() method, it returns the next token from the current position in the string until it reaches the next delimiter or the end of the string. The StringTokenizer updates its internal position to the start of the next token for subsequent calls to nextToken().
+
+Here's a simple example:
+
+-->java code
+
+String input = "This is a sample text";
+StringTokenizer tokenizer = new StringTokenizer(input, " "); // Using space as delimiter
+
+while (tokenizer.hasMoreTokens()) {
+    String token = tokenizer.nextToken();
+    System.out.println("Token: " + token);
+}
+In this code:
+
+StringTokenizer initializes with the input string "This is a sample text" and uses space " " as the delimiter.
+The while loop repeatedly calls hasMoreTokens() to check if there are more tokens.
+Inside the loop, nextToken() retrieves and prints each token one by one until there are no more tokens left.
+The StringTokenizer class doesn't store all tokens in an array or collection at once. Instead, it performs tokenization on-the-fly as nextToken() is called, scanning the input string and retrieving tokens sequentially based on the specified delimiter(s).
+
+User
+
+Q) How internally stores data and how i am accessing by using nexttoken();
+
+Internally, the StringTokenizer class manages the tokenization process without storing the tokens in an array or collection. Instead, it maintains the state of the current position within the input string and uses that information to retrieve tokens sequentially when nextToken() is called.
+
+Here's a simplified view of how it might work internally:
+
+Initialization: When you create a StringTokenizer object and provide an input string along with delimiters, the StringTokenizer initializes itself with this information.
+
+Positional Management: It keeps track of the current position within the input string. Initially, it starts at the beginning of the string.
+
+Tokenization On-Demand: When you call nextToken(), the StringTokenizer starts from the current position and scans the input string sequentially to find the next occurrence of the specified delimiter(s).
+
+Token Retrieval: It extracts the substring from the current position up to the next delimiter (or until the end of the string if no further delimiter is found). This substring represents the token to be returned by nextToken().
+
+Position Update: After retrieving the token, the internal position of the StringTokenizer is updated to point just after the retrieved token, preparing for the next call to nextToken().
+
+Sequential Access: Subsequent calls to nextToken() continue this process, extracting tokens sequentially from the input string based on the current position until there are no more tokens left.
+
+The StringTokenizer does not store all tokens in an array or collection beforehand. Instead, it tokenizes the input string on-the-fly and returns tokens individually using nextToken() as requested, without storing the entire set of tokens in memory simultaneously.
+
+By managing the position and performing tokenization sequentially, StringTokenizer offers efficient memory usage, especially when dealing with large input strings, as it only processes and retrieves tokens as needed.
+
+
+Q)How StringTokenizer code  written internally?
+
+The StringTokenizer class in Java is part of the Java API, and its source code is not directly available for public view. However, the StringTokenizer class internally manages the tokenization process without directly storing tokens in an array or collection.
+
+While the actual implementation details of StringTokenizer are not publicly available in the form of source code, the general logic behind how it works can be described, as explained in previous responses.
+
+The StringTokenizer class operates by maintaining the current position within the input string and scanning the string sequentially to identify tokens based on specified delimiter(s). The nextToken() method extracts tokens on-demand by finding and returning the next substring from the current position to the next delimiter or the end of the string.
+
+The class uses private fields and methods to manage the state of the tokenizer, control the position within the string, identify delimiters, and extract tokens. Internally, it keeps track of the current position and uses logic to identify and extract tokens as required when nextToken() is invoked.
+
+The code for StringTokenizer is part of the Java Runtime Library (JRE), and its specific implementation details, including the internal mechanisms used for managing the tokenizer state and token extraction, are not publicly accessible in the form of source code to users. However, the class provides the expected functionality for tokenizing strings based on delimiters and retrieving tokens sequentially through the nextToken() method.
+
+
+Q)It keeps track of the current position within the input string. Initially, it starts at the beginning of the string. how it is tracking ,Is it using any index or how?
+
+The StringTokenizer class internally keeps track of the current position within the input string using an index-based approach. Although the source code for StringTokenizer is not publicly available, the general concept involves maintaining an index variable to keep track of the current position in the input string.
+
+Here is a simplified explanation of how StringTokenizer might keep track of the current position:
+
+Index Variable: Internally, StringTokenizer would likely utilize an index variable that represents the current position within the input string. This index starts at 0 initially, indicating the beginning of the string.
+
+nextToken() Method: When nextToken() is called, StringTokenizer uses this index to start scanning the input string from the current position.
+
+Scanning and Delimiter Detection: It sequentially scans the input string, starting from the current index, looking for occurrences of the specified delimiter(s).
+
+Token Extraction: Once it identifies the next delimiter or the end of the string, it extracts the substring from the current index up to the position just before the delimiter or the end of the string, which represents the token to be returned by nextToken().
+
+Updating Index: After retrieving the token, the index is updated to point to the position just after the extracted token, preparing for the next call to nextToken().
+
+This index-based approach allows StringTokenizer to maintain and update the current position within the input string as it tokenizes the string sequentially. By managing this index, it can efficiently extract tokens without needing to store all tokens in memory but rather by scanning the string from the current position.
+
+
+
+
